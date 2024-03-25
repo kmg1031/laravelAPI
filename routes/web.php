@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,6 @@ Route::get('/register', [UserController::class, 'create'])->name('register');
 
 // 유저 등록 양식 제출을 처리하는 라우트
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
+// 게시글
+Route::resource('posts', PostController::class)->middleware('auth');
