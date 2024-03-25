@@ -1,11 +1,21 @@
-<!-- resources/views/posts/create.blade.php -->
-<form action="{{ route('posts.store') }}" method="POST">
-    @csrf
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" required>
+{{-- 게시글 생성 폼 페이지 --}}
+@extends('layouts.app')
 
-    <label for="body">Body:</label>
-    <textarea name="body" id="body" required></textarea>
+@section('content')
+<div class="container">
+    <h1>새 게시글 작성</h1>
 
-    <button type="submit">Submit</button>
-</form>
+    <form action="{{ route('posts.store') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="body">내용</label>
+            <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">게시글 작성</button>
+    </form>
+</div>
+@endsection

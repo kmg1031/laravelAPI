@@ -28,4 +28,15 @@ Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 // 게시글
-Route::resource('posts', PostController::class)->middleware('auth');
+Route::prefix('posts')->name('posts.')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::get('/{post}', [PostController::class, 'show'])->name('show');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/create', [PostController::class, 'create'])->name('create');
+        Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::put('/{post}', [PostController::class, 'update'])->name('update');
+        Route::delete('/{post}', [PostController::class, 'destroy'])->name('destroy');
+    });
+});
