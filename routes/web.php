@@ -17,7 +17,7 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
@@ -28,15 +28,15 @@ Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 // 게시글
-Route::prefix('posts')->name('posts.')->group(function () {
-    Route::get('/', [PostController::class, 'index'])->name('index');
-    Route::get('/{post}', [PostController::class, 'show'])->name('show');
+Route::prefix('posts')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/{post}', [PostController::class, 'show'])->name('posts.show');
 
     Route::middleware('auth')->group(function () {
-        Route::get('/create', [PostController::class, 'create'])->name('create');
-        Route::post('/', [PostController::class, 'store'])->name('store');
-        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('edit');
-        Route::put('/{post}', [PostController::class, 'update'])->name('update');
-        Route::delete('/{post}', [PostController::class, 'destroy'])->name('destroy');
+        Route::get('/create', [PostController::class, 'create'])->name('posts.create');
+        Route::post('/', [PostController::class, 'store'])->name('posts.store');
+        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+        Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
+        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 });
