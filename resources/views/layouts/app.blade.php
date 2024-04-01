@@ -16,8 +16,12 @@
                 <a href="#" style="font-size: 1.5em;">My Laravel App</a>
                 <ul>
                     <li><a href="{{ url('/') }}">Home</a></li>
+                    @if(Auth::check())
+                        <li><a href="{{ route('logout') }}">Login</a></li>
+                    @else
+                        <li><a href="{{ route('login.index') }}">Login</a></li>
+                    @endif
                     <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                    <!-- 추가적인 메뉴 항목을 여기에 배치할 수 있습니다 -->
                 </ul>
             </div>
         </nav>

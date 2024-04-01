@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
 
 
 /*
@@ -21,11 +22,23 @@ Route::get('/', function () {
 });
 
 
-// 유저 등록 양식을 표시하는 라우트
-Route::get('/register', [UserController::class, 'create'])->name('register');
+// 유저
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/', [UserController::class, 'store'])->name('users.store');
+    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+});
 
-// 유저 등록 양식 제출을 처리하는 라우트
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
+// login
+Route::prefix('login')->group(function () {
+    Route::get('/', [LoginController::class, 'login'])->name('login.index');
+    Route::post('/', [LoginController::class, 'loginProcess'])->name('login.process');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 // 게시글
 Route::prefix('posts')->group(function () {
