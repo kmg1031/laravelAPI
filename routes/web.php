@@ -24,13 +24,15 @@ Route::get('/', function () {
 
 // 유저
 Route::prefix('users')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('users.index');
-    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/', [UserController::class, 'store'])->name('users.store');
-    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    Route::prefix('mypage')->group(function () {
+        Route::get('/{user}', [UserController::class, 'show'])->name('users.mypage.show');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.mypage.edit');
+        Route::put('/{user}', [UserController::class, 'update'])->name('users.mypage.update');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.mypage.destroy');
+    });
 });
 
 // login
