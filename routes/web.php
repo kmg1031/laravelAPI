@@ -19,7 +19,7 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 
 // 유저
@@ -35,7 +35,7 @@ Route::prefix('users')->group(function () {
     });
 });
 
-// login
+// 로그인
 Route::prefix('login')->group(function () {
     Route::get('/', [LoginController::class, 'login'])->name('login.index');
     Route::post('/', [LoginController::class, 'loginProcess'])->name('login.process');

@@ -3,51 +3,59 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 
 
 class LoginController extends Controller
 {
-    // 유저 등록 양식을 표시하는 메소드
+    // 로그인 페이지
     public function login()
     {
         return view('login.index');
     }
 
-    // 유저 등록 양식 제출을 처리하는 메소드
+    // 로그인 프로세스
     public function loginProcess(Request $request)
     {
-
         // log
         Log::info('user store method');
         Log::info($request);
 
-        $request->validate([
-            'id' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-        ]);
+        $rules = [
+            'email' => 'required|email',
+            'password' => 'required|string|min:4',
+        ];
 
-        Log::info('user store method after validation');
 
-        $user = User::where('id', $request->id)->first();
+        if (Auth::attempt($request->only('email', 'password'))) {
+            // login success
+            Log::channel('login')->info('User login success.', ['email' => $request->email]);
 
-        if ($user && Hash::check($request->password, $user->password)) {
+            $user = Auth::user();
             session(['user' => $user]);
-            return redirect()->route('index');
-        }
 
-        return redirect()->route('login')->with('error', 'Invalid credentials.');
+            return redirect()->route('index');
+        }else{
+            // login fail
+            Log::channel('login')->warning('User login failed.', ['email' => $request->email]);
+
+            return redirect()->route('login')->withErrors('Invalid email or password.');
+        }
     }
 
     // 유저 로그아웃 처리하는 메소드
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->forget('user');
-        return redirect()->route('login');
+        Auth::logout();
+
+        // 세션을 무효화하고 재생성합니다.
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index');
     }
 
 }

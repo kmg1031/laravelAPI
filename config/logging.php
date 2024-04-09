@@ -66,6 +66,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
+        'login' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/login/login.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 30,
+        ],
 
         'slack' => [
             'driver' => 'slack',
@@ -102,6 +108,7 @@ return [
 
         'errorlog' => [
             'driver' => 'errorlog',
+            'path' => storage_path('logs/laravel-error.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>My Laravel App</title>
     <link
         rel="stylesheet"
@@ -17,11 +18,11 @@
                 <ul>
                     <li><a href="{{ url('/') }}">Home</a></li>
                     @if(Auth::check())
-                        <li><a href="{{ route('logout') }}">Login</a></li>
+                        <li><a href="{{ route('logout') }}">로그아웃</a></li>
                     @else
-                        <li><a href="{{ route('login.index') }}">Login</a></li>
+                        <li><a href="{{ route('login.index') }}">로그인</a></li>
                     @endif
-                    <li><a href="{{ route('posts.index') }}">Posts</a></li>
+                    <li><a href="{{ route('posts.index') }}">게시글</a></li>
                 </ul>
             </div>
         </nav>
