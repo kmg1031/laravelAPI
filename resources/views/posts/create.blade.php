@@ -12,8 +12,8 @@
             <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="form-group">
-            <label for="body">내용</label>
-            <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+            <label for="content">내용</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">게시글 작성</button>
     </form>

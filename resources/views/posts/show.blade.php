@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $post->title }}</h1>
-    <p>{{ $post->body }}</p>
+    <p>{{ $post->content }}</p>
     <a href="{{ route('posts.index') }}" class="btn btn-secondary">목록으로 돌아가기</a>
 </div>
 @endsection

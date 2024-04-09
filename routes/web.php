@@ -45,13 +45,13 @@ Route::prefix('login')->group(function () {
 // 게시글
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/show/{post}', [PostController::class, 'show'])->name('posts.show');
 
     Route::middleware('auth')->group(function () {
         Route::get('/create', [PostController::class, 'create'])->name('posts.create');
-        Route::post('/', [PostController::class, 'store'])->name('posts.store');
-        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-        Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
-        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+        Route::post('/store', [PostController::class, 'store'])->name('posts.store');
+        Route::get('/edit/{post}', [PostController::class, 'edit'])->name('posts.edit');
+        Route::put('/update/{post}', [PostController::class, 'update'])->name('posts.update');
+        Route::delete('/destroy/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 });
