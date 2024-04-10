@@ -34,7 +34,7 @@ class PostController extends Controller
         ]);
 
         $post = Post::create([
-            'user_idx' => auth()->id(),
+            'user_idx' => auth()->user()->idx,
             'user_name' => auth()->user()->name ?? '나',
             'title' => $request->title,
             'content' => $request->content,
@@ -54,7 +54,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // 본인만 수정할 수 있도록 수정
-        if ($post->user_idx !== auth()->id()) {
+        if ($post->user_idx !== auth()->user()->idx) {
             return redirect()->route('posts.index')->with('error', '수정 권한이 없습니다.');
         }
 
@@ -73,14 +73,14 @@ class PostController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-
-        return redirect()->route('posts.index')->with('success', '게시글이 수정 되었습니다.');
+        // 게시글 페이지로 이동
+        return redirect()->route('posts.show', $post)->with('success', '게시글이 성공적으로 수정되었습니다.');
     }
 
     // 게시글을 삭제하는 메서드
     public function destroy(Post $post)
     {
-        if ($post->user_idx !== auth()->id()) {
+        if ($post->user_idx !== auth()->user()->idx) {
             return redirect()->route('posts.index')->with('error', '수정 권한이 없습니다.');
         }
 

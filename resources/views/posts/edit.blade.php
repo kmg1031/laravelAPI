@@ -8,15 +8,22 @@
     <form action="{{ route('posts.update', $post->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="form-group">
+        <div>
             <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}" required>
+            <input type="text" id="title" name="title" value="{{ $post->title }}" required>
         </div>
         <div class="form-group">
             <label for="content">내용</label>
             <textarea class="form-control" id="content" name="content" rows="5" required>{{ $post->content }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">게시글 수정</button>
+        <button id="btn-eedit">게시글 수정</button>
+        <button id="btn-cancel">취소</button>
     </form>
 </div>
+<script>
+    // 취소 버튼 클릭 이벤트
+    document.getElementById('btn-cancel').addEventListener('click', function() {
+        location.href = '{{ route('posts.show', $post->id) }}';
+    });
+</script>
 @endsection
