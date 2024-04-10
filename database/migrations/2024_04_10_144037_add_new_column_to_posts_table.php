@@ -26,7 +26,7 @@ class AddNewColumnToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropSoftDeletes();
         });
     }
 }
