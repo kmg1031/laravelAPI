@@ -16,13 +16,17 @@
             <div class="container" style="max-width: 640px; margin: 0 auto;">
                 <a href="#" style="font-size: 1.5em;">My Laravel App</a>
                 <ul>
+                    {{-- 공통 --}}
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    @if(Auth::check())
-                        <li><a href="{{ route('logout') }}">로그아웃</a></li>
-                    @else
+                    {{-- 게스트 --}}
+                    @guest
                         <li><a href="{{ route('login.index') }}">로그인</a></li>
-                    @endif
-                    <li><a href="{{ route('posts.index') }}">게시글</a></li>
+                    @endguest
+                    {{-- 인증 유저 --}}
+                    @auth
+                        <li><a href="{{ route('logout') }}">로그아웃</a></li>
+                        <li><a href="{{ route('posts.index') }}">게시글</a></li>
+                    @endauth
                 </ul>
             </div>
         </nav>
