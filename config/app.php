@@ -28,6 +28,9 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'is_production' => env('APP_ENV') === 'production',
+    'is_not_production' => env('APP_ENV') !== 'production',
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
