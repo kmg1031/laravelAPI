@@ -25,8 +25,9 @@
                     {{-- 인증 유저 --}}
                     @auth
                         <li><a href="{{ route('logout') }}">로그아웃</a></li>
-                        <li><a href="{{ route('posts.index') }}">게시글</a></li>
+                        <li><a href="{{ route('shops.index') }}">상점</a></li>
                     @endauth
+                    <li><a href="{{ route('posts.index') }}">게시글</a></li>
                 </ul>
             </div>
         </nav>

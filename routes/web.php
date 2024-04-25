@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ShopsController;
 
 
 /*
@@ -54,4 +55,18 @@ Route::prefix('posts')->group(function () {
         Route::put('/update/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/destroy/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
+});
+
+// shops
+Route::prefix('shops')->group(function () {
+    Route::get('/', [ShopsController::class, 'index'])->name('shops.index');
+    Route::get('/show/{shops}', [ShopsController::class, 'show'])->name('shops.show');
+
+    // Route::middleware('auth')->group(function () {
+        Route::get('/create', [ShopsController::class, 'create'])->name('shops.create');
+        Route::post('/store', [ShopsController::class, 'store'])->name('shops.store');
+        Route::get('/edit/{shops}', [ShopsController::class, 'edit'])->name('shops.edit');
+        Route::put('/update/{shops}', [ShopsController::class, 'update'])->name('shops.update');
+        Route::delete('/destroy/{shops}', [ShopsController::class, 'destroy'])->name('shops.destroy');
+    // });
 });
