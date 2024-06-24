@@ -42,7 +42,7 @@ class LoginController extends Controller
             // login fail
             Log::channel('login')->warning('User login failed.', ['email' => $request->email]);
 
-            return redirect()->route('login')->withErrors('Invalid email or password.');
+            return redirect()->route('login.index')->withErrors('Invalid email or password.');
         }
     }
 
