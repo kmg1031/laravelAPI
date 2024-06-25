@@ -5,6 +5,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ShopsController;
+use App\Http\Controllers\MenusController;
 
 
 /*
@@ -69,4 +70,16 @@ Route::prefix('shops')->group(function () {
         Route::put('/update/{shops}', [ShopsController::class, 'update'])->name('shops.update');
         Route::delete('/destroy/{shops}', [ShopsController::class, 'destroy'])->name('shops.destroy');
     // });
+
+    // menus
+    Route::prefix('{shop}/menus')->group(function () {
+        Route::get('/', [MenusController::class, 'index'])->name('shops.menus.index');
+        Route::get('/create', [MenusController::class, 'create'])->name('shops.menus.create');
+        Route::post('/store', [MenusController::class, 'store'])->name('shops.menus.store');
+        Route::get('/show/{menu}', [MenusController::class, 'show'])->name('shops.menus.show');
+        Route::get('/edit/{menu}', [MenusController::class, 'edit'])->name('shops.menus.edit');
+        Route::put('/update/{menu}', [MenusController::class, 'update'])->name('shops.menus.update');
+        Route::delete('/destroy/{menu}', [MenusController::class, 'destroy'])->name('shops.menus.destroy');
+    });
 });
+

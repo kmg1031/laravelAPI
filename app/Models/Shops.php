@@ -14,4 +14,12 @@ class Shops extends Model
 
     protected $primaryKey = 'idx';
 
+
+    /*
+     * relationship
+     */
+    public function menus()
+    {
+        return $this->hasMany(ShopsMenus::class, 'shop_idx', 'idx');
+    }
 }

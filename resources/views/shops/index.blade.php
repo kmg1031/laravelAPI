@@ -5,6 +5,8 @@
 
     <h1>상점 목록</h1>
 
+    <a href="{{ route('shops.create') }}">상점 등록</a>
+
     <table>
         <thead>
             <tr>
@@ -34,6 +36,10 @@
                                 {{ $shop->opened_at }} ~ {{ $shop->closed_at }}
                             @endif
                         </td>
+                        {{-- 메뉴 관리 --}}
+                        <td>
+                            <a href="{{ route('shops.menus.index', ['shop' => $shop->idx]) }}">메뉴 관리</a>
+                        </td>
                         <td>
                             @auth
                                 <a href="{{ route('shops.edit', $shop->idx) }}">수정</a>
@@ -48,8 +54,6 @@
                 @endforeach
             @endif
     </table>
-
-    <a href="{{ route('shops.create') }}">상점 등록</a>
 
     @auth
         <form id="form-delete" method="POST" action="">
